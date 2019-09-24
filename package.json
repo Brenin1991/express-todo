@@ -1,0 +1,25 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --ignore arquivos/ ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brenin1991/ToDoList.git"
+  },
+  "author": "Brenin1991",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brenin1991/ToDoList/issues"
+  },
+  "homepage": "https://github.com/Brenin1991/ToDoList#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "nodemon": "^1.19.2",
+    "pug": "^2.0.4"
+  }
+}

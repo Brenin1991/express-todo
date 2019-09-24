@@ -1,0 +1,31 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  a.navbar-brand(href='#')
+    img.d-inline-block.align-top(src='images/logo.svg' width='30' height='30' alt='')
+    | To Do List
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    if session.user
+      ul.navbar-nav.mr-auto
+        li.nav-item.active
+          a.nav-link(href='/')
+            | Home 
+            span.sr-only (current)
+        li.nav-item.dropdown
+          a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+            | Tasks
+          .dropdown-menu(aria-labelledby='navbarDropdown')
+            a.dropdown-item(href='#') New Task
+            a.dropdown-item(href='#') All Tasks
+            .dropdown-divider
+            a.dropdown-item(href='#') About
+      ul.inline.my-2.my-lg-0
+        a.btn.btn-outline-success.my-2.my-sm-0(href='/' role='button' aria-pressed='true')= session.user.name
+        a.btn.btn-success.my-2.my-sm-0(href='/logout' role='button' aria-pressed='true') Logout
+    else
+      ul.navbar-nav.mr-auto
+        
+      ul.inline.my-2.my-lg-0
+          a.btn.btn-outline-success.my-2.my-sm-0(href='login' role='button' aria-pressed='true') Sign in
+          a.btn.btn-success.my-2.my-sm-0(href='register' role='button' aria-pressed='true') Sign Up
+

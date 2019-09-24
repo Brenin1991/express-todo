@@ -1,0 +1,41 @@
+extends base
+
+block cont
+  .container
+    if session.user
+      .row
+        .col-md-6
+          .todolist.not-done
+            h1 Todos
+            input.form-control.add-todo(type='text' placeholder='Add todo')
+            button#checkAll.btn.btn-success Mark all as done
+            hr
+            ul#sortable.list-unstyled
+              li.ui-state-default
+                .checkbox
+                  label
+                    input(type='checkbox' value='')
+                    | Take out the trash
+              li.ui-state-default
+                .checkbox
+                  label
+                    input(type='checkbox' value='')
+                    | Buy bread
+              li.ui-state-default
+                .checkbox
+                  label
+                    input(type='checkbox' value='')
+                    | Teach penguins to fly
+            .todo-footer
+              strong
+                span.count-todos
+              |  Items Left
+        .col-md-6
+          .todolist
+            h1 Already Done
+            ul#done-items.list-unstyled
+              li
+                | Some item 
+                button.remove-item.btn.btn-default.btn-xs.pull-right
+                  span.glyphicon.glyphicon-remove
+    else

@@ -1,0 +1,16 @@
+extends ../base
+
+block cont
+  .container
+    .row 
+      .col-sm-9.col-md-7.col-lg-5.mx-auto
+        if message
+          .alert.alert-danger= message
+        .card.card-signin.my-5.text-center
+          .card-body
+            h1.card-title Add task
+              form(action='/AddTask' method='post')
+                .form-group
+                  input#exampleInputEmail1.form-control(type='text' name='title' placeholder='Title')
+                  input#exampleInputEmail1.form-control(type='text' name='description' placeholder='Description')
+                button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Create

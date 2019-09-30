@@ -1,0 +1,18 @@
+extends base
+
+block cont
+  .container
+    if session.user
+      .row
+        .col-sm-9.col-md-7.col-lg-5.mx-auto
+          form(action='' method='post')
+          .todolist.not-done
+            h1= task.title
+            h5= task.description
+            .todo-footer
+              strong
+                span.count-todos
+              a.btn.btn-outline-success.my-2.my-sm-0(href='/') Back
+              a.btn.btn-success.my-2.my-sm-0(href=`/Complete/${task.id}`) Complete
+              a.btn.btn-success.my-2.my-sm-0(href=`` role='button' aria-pressed='true') Edit
+              a.btn.btn-danger.my-2.my-sm-0(href='AddTask' role='button' aria-pressed='true') Delete

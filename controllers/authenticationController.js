@@ -1,6 +1,5 @@
 const session = require('express-session');
 const userModel = require('../models/userModel');
-//const cardapioModel = require('../models/cardapioModel');
 
 exports.startSession = session({
   secret: 'keyboard cat',
@@ -63,7 +62,7 @@ exports.logout = (req, res) => {
 exports.register = (req, res) => {
   res.status(200).render('users/register', {
     title: 'Register',
-    users: {}
+    user: {}
   });
 };
 
@@ -79,20 +78,21 @@ exports.validateRegister = (req, res) => {
 
   if (!errors.isErrors()) {
     const id = userModel.lastId() + 1;
-    const user = { id, name, email, password };
-    userModel.users.push(users);
-    req.session.users = users;
+    const tasks = [];
+    const user = { id, name, email, password, tasks};
+    userModel.users.push(user);
+    req.session.user = user;
     userModel.saveJSON(() => {
-      res.status(200).render('index', {
+      res.status(200).render("index", {
         user,
-        msg: `Usuário ${user.name} registrado com sucesso.`
+        message: "foioo"
       });
     });
   } else {
     const userView = { name, email };
-    res.status(401).render('users/register', {
+    res.status(401).render("register", {
       user: userView,
-      errors
+      message: errors
     });
   }
 };

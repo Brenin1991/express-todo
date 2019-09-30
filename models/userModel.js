@@ -12,7 +12,17 @@ exports.lastId = () => {
   return id;
 };
 
-exports.validate = (name, email, password, passwordConfirmation, edition = false) => {
+exports.lastIdTask = (user) => {
+  let id = -1;
+  const tasks = user.tasks;
+  tasks.forEach(t => {
+    // eslint-disable-next-line prefer-destructuring
+    if (t.id > id) id = t.id;
+  });
+  return id;
+};
+
+exports.validate = (name, email, password, passwordConfirmation) => {
   const errors = {
     name: [],
     email: [],
@@ -34,19 +44,31 @@ exports.validate = (name, email, password, passwordConfirmation, edition = false
   if (!email) {
     errors.email.push('Por favor, informe o seu e-mail.');
   }
-  if (!edition) {
-    if (!password) {
-      errors.password.push('Por favor, informe a sua senha.');
-    }
-    if (!passwordConfirmation) {
-      errors.passwordConfirmation.push('Por favor, confirme a sua senha.');
-    }
-  }
+  
   if (password !== passwordConfirmation) {
     errors.passwordConfirmation.push('A senha informada não é igual à confirmação.');
   }
 
   return errors;
+};
+
+exports.update = (user, task) => {
+  users.forEach(u => {
+    if(u.id === user.id){
+      u.tasks.push(task);
+    }
+  });
+};
+
+//erro aqui
+exports.completeTask = (user, task) => {
+  users.forEach(u => {
+    if(u.id === user.id){
+      if(u.tasks.task.id === task.id){ 
+        u.tasks.task.status = 1;
+      }
+    }
+  });
 };
 
 exports.saveJSON = callback => {

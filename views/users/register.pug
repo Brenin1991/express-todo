@@ -4,16 +4,18 @@ block cont
   .container
     .row 
       .col-sm-9.col-md-7.col-lg-5.mx-auto
+        if message
+          .alert.alert-danger= message
         .card.card-signin.my-5.text-center
           .card-body
             h1.card-title Register
-              form(action="", method="post")
+              form(action="/register", method="post")
                 .form-group
-                  input#exampleInput1.form-control(placeholder='Enter Name')
+                  input#exampleInput1.form-control(placeholder='Enter Name' name='name')
                 .form-group
-                  input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter email')
+                  input#exampleInputEmail1.form-control(type='email' name='email' placeholder='Enter email')
                 .form-group
-                  input#exampleInputPassword1.form-control(type='password' placeholder='Password')
+                  input#exampleInputPassword1.form-control(type='password' name='password' placeholder='Password')
                 .form-group
-                  input#exampleInputPassword1.form-control(type='password' placeholder='Confirm Password')
+                  input#exampleInputPassword1.form-control(type='password' name='passwordConfirmation' placeholder='Confirm Password')
                 button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Register

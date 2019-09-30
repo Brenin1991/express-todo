@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
-//const usuarioRouter = require("./routes/usersRoutes");
 const authenticationRoutes = require("./routes/authenticationRoutes");
 const authenticationController = require("./controllers/authenticationController");
+const taskRouter = require("./routes/taskRoutes");
+const taskController = require("./controllers/taskController");
+const taskModel = require("./models/taskModel");
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -17,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 ////////////////////////////////////////////////////
 
 app.use("/", authenticationRoutes);
-//app.use("/usuarios", userRouter);
+app.use("/", taskRouter);
 
 app.get('/', (req, res) => {
 	res.status(200).render('index', {
@@ -26,7 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.all('*', (req, res) => {
-	res.status(404).render('404', {
+	res.status(404).render('index', {
 		title: 'Recurso Inexistente'
 	});
 });

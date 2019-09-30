@@ -5,37 +5,24 @@ block cont
     if session.user
       .row
         .col-md-6
+          form(action='/complete' method='post')
           .todolist.not-done
             h1 Todos
-            input.form-control.add-todo(type='text' placeholder='Add todo')
-            button#checkAll.btn.btn-success Mark all as done
-            hr
             ul#sortable.list-unstyled
-              li.ui-state-default
-                .checkbox
-                  label
-                    input(type='checkbox' value='')
-                    | Take out the trash
-              li.ui-state-default
-                .checkbox
-                  label
-                    input(type='checkbox' value='')
-                    | Buy bread
-              li.ui-state-default
-                .checkbox
-                  label
-                    input(type='checkbox' value='')
-                    | Teach penguins to fly
-            .todo-footer
-              strong
-                span.count-todos
-              |  Items Left
+              each task in session.user.tasks
+                if task.status === 0
+                  li.ui-state-default
+                    a(href=`/viewTask/${task.id}`)= task.title
         .col-md-6
           .todolist
             h1 Already Done
             ul#done-items.list-unstyled
-              li
-                | Some item 
-                button.remove-item.btn.btn-default.btn-xs.pull-right
-                  span.glyphicon.glyphicon-remove
+              each task in session.user.tasks
+                if task.status === 1
+                  li
+                    a= task.title
+            .todo-footer
+              strong
+                span.count-todos
+              a.btn.btn-danger.my-2.my-sm-0(href='AddTask' role='button' aria-pressed='true') Clear
     else

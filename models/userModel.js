@@ -13,7 +13,7 @@ exports.lastId = () => {
 };
 
 exports.lastIdTask = (user) => {
-  let id = -1;
+  let id = 0;
   const tasks = user.tasks;
   tasks.forEach(t => {
     // eslint-disable-next-line prefer-destructuring
@@ -60,13 +60,16 @@ exports.update = (user, task) => {
   });
 };
 
-//erro aqui
-exports.completeTask = (user, task) => {
+
+exports.completeTask = (task, user) => {
   users.forEach(u => {
     if(u.id === user.id){
-      if(u.tasks.task.id === task.id){ 
-        u.tasks.task.status = 1;
-      }
+      console.log('adasd');
+      u.tasks.forEach(t => {
+        if(t.id === task.id){
+          t.status = 1;
+        }
+      });
     }
   });
 };

@@ -3,8 +3,6 @@ const path = require('path');
 const authenticationRoutes = require("./routes/authenticationRoutes");
 const authenticationController = require("./controllers/authenticationController");
 const taskRouter = require("./routes/taskRoutes");
-const taskController = require("./controllers/taskController");
-const taskModel = require("./models/taskModel");
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));

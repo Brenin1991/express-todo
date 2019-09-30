@@ -68,20 +68,25 @@ exports.viewTask = (req, res) => {
 exports.completeTask = (req, res) => {
   const id = req.params.id * 1;
   const user = req.session.user;
-  console.log(id);
+ 
   const task = req.session.user.tasks.find(
     t => t.id === id
   );
-
-  if (id) {
-    userModel.completeTask(user, task);
+  
+  if (task) {
+    //console.log(user);
+    //console.log(u);
+    console.log(task);
+    userModel.completeTask(task, user);
     userModel.saveJSON(() => {
       req.session.user = user;
       res.status(200).render("index", {
+        task,
         title: 'Home',
         message: "foioo"
       });
     });
+    console.log(task);
   } else {
     res.status(404).render("404", {
       title: "Recurso Inexistente"

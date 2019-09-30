@@ -5,7 +5,7 @@ block cont
     if session.user
       .row
         .col-sm-9.col-md-7.col-lg-5.mx-auto
-          form(action='' method='post')
+          form(action='/' method='post')
           .todolist.not-done
             h1= task.title
             h5= task.description

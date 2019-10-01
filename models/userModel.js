@@ -60,7 +60,6 @@ exports.update = (user, task) => {
   });
 };
 
-
 exports.completeTask = (task, user) => {
   users.forEach(u => {
     if(u.id === user.id){
@@ -68,6 +67,20 @@ exports.completeTask = (task, user) => {
       u.tasks.forEach(t => {
         if(t.id === task.id){
           t.status = 1;
+        }
+      });
+    }
+  });
+};
+
+exports.updateTask = (task, user, title, description) => {
+  users.forEach(u => {
+    if(u.id === user.id){
+      u.tasks.forEach(t => {
+        if(t.id === task.id){
+          t.title = title;
+          t.description = description;
+          console.log('update' + t.title);
         }
       });
     }

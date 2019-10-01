@@ -93,3 +93,44 @@ exports.completeTask = (req, res) => {
     });
   }
 };
+
+exports.updateTask = (req, res) => {
+  const id = req.params.id * 1;
+  console.log(id);
+
+  res.status(200).render('users/editTask', {
+    id
+  });
+};
+
+exports.validateUpdate = (req, res) => {
+  const {id, title, description } = req.body;
+  const idTask = id * 1;
+  const user = req.session.user;
+  const task = user.tasks.find(
+    t => t.id === idTask
+  );
+
+  console.log("foi porrA");
+  console.log(idTask);
+  console.log(user);
+  console.log(task);
+
+  userModel.updateTask(task, user, title, description);
+  if (task) {
+    userModel.saveJSON(() => {
+      req.session.user = user;
+      res.status(200).render("index", {
+        task,
+        title: 'Home',
+        message: "foioo"
+      });
+    });
+    console.log(task);
+  } else {
+    res.status(404).render("404", {
+      title: "Recurso Inexistente"
+    });
+  }
+};
+

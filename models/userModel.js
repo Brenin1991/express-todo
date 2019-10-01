@@ -81,8 +81,10 @@ exports.updateTask = (task, user, title, description) => {
     if(u.id === user.id){
       u.tasks.forEach(t => {
         if(t.id === task.id){
-          t.title = title;
-          t.description = description;
+          if(t.status != 1){
+            t.title = title;
+            t.description = description;
+          }
         }
       });
     }

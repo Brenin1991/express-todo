@@ -13,20 +13,28 @@ exports.validateTask = (req, res) => {
   const user = req.session.user;
   
   if (user) {
-    const id = userModel.lastIdTask(user) + 1;
-    const task = { id, title, description, status: 0 };
+    if(title.length > 1){
+      const id = userModel.lastIdTask(user) + 1;
+      const task = { id, title, description, status: 0 };
 
-    user.tasks.push(task);
+      user.tasks.push(task);
 
-    userModel.update(user, task);
+      userModel.update(user, task);
 
-    userModel.saveJSON(() => {
-      req.session.user = user;
-      res.status(200).render('index', {
-        title: 'Home',
-        message: 'Sucess'
+      userModel.saveJSON(() => {
+        req.session.user = user;
+        res.status(200).render('index', {
+          title: 'Home',
+          message: 'Sucess'
+        });
       });
-    });
+    }
+    else{
+      res.status(404).render('404', {
+        title: 'Error',
+        message: 'Erros'
+      });
+    }
   } else {
     res.status(404).render('404', {
       title: 'Nonexistent Feature',
@@ -101,20 +109,26 @@ exports.validateUpdate = (req, res) => {
     t => t.id === idTask
   );
 
-  userModel.updateTask(task, user, title, description);
   if (task) {
-    userModel.saveJSON(() => {
-      req.session.user = userModel.users.find(
-        u => u.id === user.id
-      );
-      res.status(200).render('index', {
-        user,
-        title: 'Home',
-        message: 'Sucess'
+    if(title.length > 1){
+      userModel.updateTask(task, user, title, description);
+      userModel.saveJSON(() => {
+        req.session.user = userModel.users.find(
+          u => u.id === user.id
+        );
+        res.status(200).render('index', {
+          user,
+          title: 'Home',
+          message: 'Sucess'
+        });
       });
-    });
-    console.log(task);
-  } else {
+    } else {
+      res.status(404).render('404', {
+        title: 'Nonexistent Feature',
+        message: 'Nonexistent Feature'
+      });
+    }
+  } else{
     res.status(404).render('404', {
       title: 'Nonexistent Feature',
       message: 'Nonexistent Feature'

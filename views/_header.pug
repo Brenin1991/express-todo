@@ -8,17 +8,12 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
     if session.user
       ul.navbar-nav.mr-auto
         li.nav-item.active
-          a.nav-link(href='/')
-            | Home 
-            span.sr-only (current)
         li.nav-item.dropdown
           a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
             | Tasks
           .dropdown-menu(aria-labelledby='navbarDropdown')
             a.dropdown-item(href='/AddTask') New Task
             a.dropdown-item(href='/') All Tasks
-            .dropdown-divider
-            a.dropdown-item(href='#') About
       ul.inline.my-2.my-lg-0
         a.btn.btn-outline-success.my-2.my-sm-0(href='/' role='button' aria-pressed='true')= session.user.name
         a.btn.btn-success.my-2.my-sm-0(href='/logout' role='button' aria-pressed='true') Logout

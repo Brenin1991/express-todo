@@ -83,15 +83,16 @@ exports.validateRegister = (req, res) => {
     userModel.users.push(user);
     req.session.user = user;
     userModel.saveJSON(() => {
-      //req.session.user = user;
-      res.status(200).render("sucess", {
+      req.session.user = user;
+      res.status(200).render('index', {
         user,
-        message: "foioo"
+        title: 'Home',
+        message: 'Sucess'
       });
     });
   } else {
     const userView = { name, email };
-    res.status(401).render("404", {
+    res.status(401).render('users/register', {
       user: userView,
       message: errors
     });

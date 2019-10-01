@@ -9,6 +9,8 @@ router
 	.get('/ViewTask/:id', protect, taskController.viewTask)
 	.get('/Complete/:id', protect, taskController.completeTask)
 	.get('/Update/:id', protect, taskController.updateTask)
-	.post('/Update', protect, taskController.validateUpdate);
+    .post('/Update', protect, taskController.validateUpdate)
+    .get('/Delete/:id', protect, taskController.deleteTask)
+    .get('/Clear/', protect, taskController.clearTasks);
 
 module.exports = router;

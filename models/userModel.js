@@ -6,7 +6,6 @@ let users;
 exports.lastId = () => {
   let id = -1;
   users.forEach(u => {
-    // eslint-disable-next-line prefer-destructuring
     if (u.id > id) id = u.id;
   });
   return id;
@@ -16,7 +15,6 @@ exports.lastIdTask = (user) => {
   let id = 0;
   const tasks = user.tasks;
   tasks.forEach(t => {
-    // eslint-disable-next-line prefer-destructuring
     if (t.id > id) id = t.id;
   });
   return id;
@@ -49,6 +47,12 @@ exports.validate = (name, email, password, passwordConfirmation) => {
     errors.passwordConfirmation.push('A senha informada não é igual à confirmação.');
   }
 
+  users.forEach(u => {
+    if (u.email === email){
+      errors.email.push('Email já em uso.');
+    }
+  });
+
   return errors;
 };
 
@@ -63,7 +67,6 @@ exports.update = (user, task) => {
 exports.completeTask = (task, user) => {
   users.forEach(u => {
     if(u.id === user.id){
-      console.log('adasd');
       u.tasks.forEach(t => {
         if(t.id === task.id){
           t.status = 1;
@@ -80,7 +83,31 @@ exports.updateTask = (task, user, title, description) => {
         if(t.id === task.id){
           t.title = title;
           t.description = description;
-          console.log('update' + t.title);
+        }
+      });
+    }
+  });
+};
+
+exports.deleteTask = (task, user) => {
+  users.forEach(u => {
+    if(u.id === user.id){
+      u.tasks.forEach(t => {
+        if(t.id === task.id){
+          u.tasks.splice(t.id - 1);
+        }
+      });
+    }
+  });
+};
+
+exports.clearTasks = (user) => {
+  let length;
+  users.forEach(u => {
+    if(u.id === user.id){
+      u.tasks.forEach(t => {
+        if(t.status === 1){ 
+          u.tasks.splice(t.id - 1);
         }
       });
     }

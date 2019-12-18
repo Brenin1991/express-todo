@@ -13,5 +13,5 @@ git clone https://github.com/Brenin1991/express-todo.git
 npm install
 ```
 
-## Diagrama de caso de uso
+## Use Case Diagram
 ![](https://github.com/Brenin1991/ToDoList/blob/master/web3bimestre.png)

@@ -1,4 +1,4 @@
-# ToDoList
+# Express-todo
 
 ## Pre requirements
 * [Node.js](https://nodejs.org/en/)

@@ -31,9 +31,9 @@ app.all('*', (req, res) => {
 	});
 });
 
-const port = 3000;
+const port = 80;
 app.listen(port, () => {
 	console.log(
-		`Servidor rodando em http://localhost:${port} ...`
+		`Servidor rodando em https://workflow-todo.herokuapp.com:${port} ...`
 	);
 });
